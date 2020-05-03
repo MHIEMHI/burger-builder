@@ -6,6 +6,10 @@ import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component
 {
+	componentWillUpdate()
+	{
+		console.log("OrderSummary Will Update");
+	}
 
 	render()
 	{
@@ -37,7 +41,7 @@ class OrderSummary extends Component
 
 OrderSummary.propTypes =
 {
-	ingredients: PropTypes.array.isRequired,
+	ingredients: PropTypes.object.isRequired,
 	purchaseCancelled: PropTypes.func,
 	purchaseContinued: PropTypes.func
 };
