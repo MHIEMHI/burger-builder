@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './NewPost.css';
-import Axios from 'axios';
+import axios from 'axios';
 
 class NewPost extends Component
 {
@@ -18,7 +18,7 @@ class NewPost extends Component
             body: this.state.content,
             author: this.state.author
         };
-        Axios.post("https://jsonplaceholder.typicode.com/posts", data);
+        axios.post("https://jsonplaceholder.typicode.com/posts", data);
     };
 
     render()

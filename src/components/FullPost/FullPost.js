@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './FullPost.css';
-import Axios from 'axios';
+import axios from 'axios';
 
 class FullPost extends Component
 {
@@ -12,7 +12,7 @@ class FullPost extends Component
     {
         if (this.props.id && (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)))
         {
-            Axios.get("/posts/" + this.props.id)
+            axios.get("/posts/" + this.props.id)
                 .then(response =>
                 {
                     this.setState({ loadedPost: response.data });
@@ -22,7 +22,7 @@ class FullPost extends Component
 
     deletePostHandler = () =>
     {
-        Axios.delete("/posts/" + this.props.id);
+        axios.delete("/posts/" + this.props.id);
     };
 
     render()

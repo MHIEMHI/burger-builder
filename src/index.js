@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Axios from 'axios';
+import axios from 'axios';
 
-//Axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
-Axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
-Axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-Axios.interceptors.request.use(request =>
+axios.interceptors.request.use(request =>
 {
 	return request;
 },
@@ -19,7 +19,7 @@ Axios.interceptors.request.use(request =>
 	}
 );
 
-Axios.interceptors.response.use(request =>
+axios.interceptors.response.use(request =>
 {
 	return request;
 },
