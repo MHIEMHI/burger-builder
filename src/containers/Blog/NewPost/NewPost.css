@@ -1,4 +1,5 @@
-.NewPost {
+.NewPost
+{
     width: 80%;
     margin: 20px auto;
     border: 1px solid #eee;
@@ -6,7 +7,8 @@
     text-align: center;
 }
 
-.NewPost label {
+.NewPost label
+{
     display: block;
     margin: 10px auto;
     text-align: center;
@@ -15,7 +17,8 @@
 
 .NewPost input,
 .NewPost textarea,
-.NewPost select {
+.NewPost select
+{
     display: block;
     width: 80%;
     box-sizing: border-box;
@@ -25,7 +28,8 @@
     margin: auto;
 }
 
-.NewPost button {
+.NewPost button
+{
     margin: 5px 0;
     padding: 10px;
     font: inherit;
@@ -36,7 +40,8 @@
 }
 
 .NewPost button:hover,
-.NewPost button:active {
+.NewPost button:active
+{
     color: white;
     background-color: #fa923f;
 }

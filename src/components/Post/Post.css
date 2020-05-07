@@ -1,4 +1,5 @@
-.Post {
+.Post
+{
     width: 250px;
     padding: 16px;
     text-align: center;
@@ -10,11 +11,13 @@
 }
 
 .Post:hover,
-.Post:active {
+.Post:active
+{
     background-color: #C0DDF5;
 }
 
-.Author {
+.Author
+{
     margin: 16px 0;
     color: #ccc;
 }
