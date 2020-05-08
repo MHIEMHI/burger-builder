@@ -17,7 +17,7 @@ class Blog extends Component
 						<ul>
 							<li><NavLink
 								activeClassName="my-active"
-								to="/"
+								to="/posts"
 								activeStyle={{
 									color: "#FA923F",
 									textDecoration: "underline"
@@ -36,7 +36,7 @@ class Blog extends Component
 				</header>
 				<Switch>
 					<Route path="/new-post" component={NewPost} />
-					<Route path="/" component={Posts} />
+					<Route path="/posts" component={Posts} />
 				</Switch>
 			</div>
 		);
