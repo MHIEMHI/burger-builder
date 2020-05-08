@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../Posts/Posts';
 import NewPost from '../Blog/NewPost/NewPost';
-import { Link } from 'react-router-dom';
 
 class Blog extends Component
 {
@@ -15,12 +15,22 @@ class Blog extends Component
 				<header>
 					<nav>
 						<ul>
-							<li><Link to="/">Home</Link></li>
-							<li><Link to={{
-								pathname: this.props.match.url + "/new-post",
+							<li><NavLink
+								activeClassName="my-active"
+								to="/"
+								activeStyle={{
+									color: "#FA923F",
+									textDecoration: "underline"
+								}}
+								exact
+							>
+								Home
+							</NavLink></li>
+							<li><NavLink to={{
+								pathname: "/new-post",
 								hash: "#submit",
 								search: "?quick-submit=true"
-							}}>New post</Link></li>
+							}}>New post</NavLink></li>
 						</ul>
 					</nav>
 				</header>
