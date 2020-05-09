@@ -14,6 +14,7 @@ class ContactData extends Component
 			name: {
 				elementType: 'input',
 				elementConfig: {
+					name: 'name',
 					type: 'text',
 					placeholder: 'Your name'
 				},
@@ -22,6 +23,7 @@ class ContactData extends Component
 			email: {
 				elementType: 'input',
 				elementConfig: {
+					name: 'email',
 					type: 'email',
 					placeholder: 'Your email'
 				},
@@ -30,6 +32,7 @@ class ContactData extends Component
 			street: {
 				elementType: 'input',
 				elementConfig: {
+					name: 'street',
 					type: 'text',
 					placeholder: 'Your street'
 				},
@@ -38,6 +41,7 @@ class ContactData extends Component
 			zipCode: {
 				elementType: 'input',
 				elementConfig: {
+					name: 'zipCode',
 					type: 'text',
 					placeholder: 'Your zipCode'
 				},
@@ -46,6 +50,7 @@ class ContactData extends Component
 			country: {
 				elementType: 'input',
 				elementConfig: {
+					name: 'country',
 					type: 'text',
 					placeholder: 'Your country'
 				},
@@ -54,6 +59,7 @@ class ContactData extends Component
 			deliveryMethod: {
 				elementType: 'select',
 				elementConfig: {
+					name: 'deliveryMethod',
 					options: [
 						{ value: 'fastest', displayName: 'Fastest' },
 						{ value: 'cheapest', displayName: 'Cheapest' }
@@ -96,6 +102,19 @@ class ContactData extends Component
 			});
 	};
 
+	inputChangedHandler = (e) =>
+	{
+		const updatedOrderForm = {
+			...this.state.orderForm
+		};
+		const updatedFormElement = {
+			...updatedOrderForm[e.target.name]
+		};
+		updatedFormElement.value = e.target.value;
+		updatedOrderForm[e.target.name] = updatedFormElement;
+		this.setState({ orderForm: updatedOrderForm });
+	};
+
 	render()
 	{
 		let formElementArray = [];
@@ -111,7 +130,11 @@ class ContactData extends Component
 			<form>
 				{
 					formElementArray.map(formElement => (
-						<Input key={formElement.id} {...formElement.config} />
+						<Input
+							key={formElement.id}
+							{...formElement.config}
+							changed={this.inputChangedHandler}
+						/>
 					))
 				}
 				<Button
