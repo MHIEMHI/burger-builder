@@ -38,10 +38,9 @@ const reducer = (state = initialState, action) =>
 			};
 
 		case ('DELETE_RESULT'):
-			const newArray = state.results.filter(result => result.id !== action.id);
 			return {
 				...state,
-				results: newArray
+				results: state.results.filter(result => result.id !== action.id)
 			};
 		default:
 			return state;
