@@ -10,13 +10,57 @@ class ContactData extends Component
 {
 	state = {
 		loading: false,
-		name: '',
-		email: '',
-		address:
-		{
-			street: '',
-			zipCode: '',
-			country: ''
+		orderForm: {
+			name: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your name'
+				},
+				value: ''
+			},
+			email: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'email',
+					placeholder: 'Your email'
+				},
+				value: ''
+			},
+			street: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your street'
+				},
+				value: ''
+			},
+			zipCode: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your zipCode'
+				},
+				value: ''
+			},
+			country: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your country'
+				},
+				value: ''
+			},
+			deliveryMethod: {
+				elementType: 'select',
+				elementConfig: {
+					options: [
+						{ value: 'fastest', displayName: 'Fastest' },
+						{ value: 'cheapest', displayName: 'Cheapest' }
+					]
+				},
+				value: ''
+			}
 		},
 	};
 
@@ -57,7 +101,10 @@ class ContactData extends Component
 		let form = (
 
 			<form>
-				<Input inputtype="input" type="text" name="name" placeholder="Your name" />
+				{
+
+				}
+				<Input elementConfig="..." elementType="..." value=".." />
 				<Input inputtype="input" type="email" name="email" placeholder="Your email" />
 				<Input inputtype="input" type="text" name="street" placeholder="Your street" />
 				<Input inputtype="input" type="text" name="zipCode" placeholder="Your zipCode" />
