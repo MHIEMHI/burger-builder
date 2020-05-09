@@ -23,7 +23,8 @@ class ContactData extends Component
 					required: true
 				},
 				valid: false,
-				touched: false
+				touched: false,
+				errorMessage: 'Name is missing'
 			},
 			email: {
 				elementType: 'input',
@@ -37,7 +38,8 @@ class ContactData extends Component
 					required: true
 				},
 				valid: false,
-				touched: false
+				touched: false,
+				errorMessage: 'Email is missing'
 			},
 			street: {
 				elementType: 'input',
@@ -51,7 +53,8 @@ class ContactData extends Component
 					required: true
 				},
 				valid: false,
-				touched: false
+				touched: false,
+				errorMessage: 'Street is missing'
 			},
 			zipCode: {
 				elementType: 'input',
@@ -67,7 +70,8 @@ class ContactData extends Component
 					maxLength: 5
 				},
 				valid: false,
-				touched: false
+				touched: false,
+				errorMessage: 'Please enter a valid zipCode'
 			},
 			country: {
 				elementType: 'input',
@@ -81,7 +85,8 @@ class ContactData extends Component
 					required: true
 				},
 				valid: false,
-				touched: false
+				touched: false,
+				errorMessage: 'Country is missing'
 			},
 			deliveryMethod: {
 				elementType: 'select',
