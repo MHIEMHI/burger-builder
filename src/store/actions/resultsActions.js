@@ -20,10 +20,10 @@ export const storeResult = result =>
 	};
 };
 
-export const deleteResult = result =>
+export const deleteResult = id =>
 {
 	return {
 		type: actionTypes.DELETE_RESULT,
-		result
+		id
 	};
 };
