@@ -11,7 +11,7 @@ const resultsReducer = (state = initialState, action) =>
 	{
 		case (actionTypes.STORE_RESULT):
 			return updateObject(state, {
-				results: state.results.concat({ id: new Date(), value: action.result })
+				results: state.results.concat({ id: new Date().getTime(), value: action.result })
 			});
 
 		case (actionTypes.DELETE_RESULT):
