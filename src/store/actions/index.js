@@ -3,4 +3,9 @@ export
 	addIngredient,
 	removeIngredient,
 	initIngredients
-} from './burgerBuilderActions'
+} from './burgerBuilderActions';
+
+export
+{
+	purchaseBurgerStart
+} from './orderActions';
