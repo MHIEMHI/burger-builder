@@ -20,6 +20,7 @@ class BurgerBuilder extends Component
 
 	componentDidMount()
 	{
+		this.props.onInitIngredients();
 	}
 
 	purchaseCancelHandler = () =>
@@ -61,7 +62,7 @@ class BurgerBuilder extends Component
 			disableInfo[key] = disableInfo[key] <= 0;
 		}
 		let orderSummary = null;
-		let burger = this.state.error ? <p>Ingredients can't be loaded! {this.state.error.message}</p> : <Spinner />;
+		let burger = this.props.error ? <p>Ingredients can't be loaded! {this.props.error.message}</p> : <Spinner />;
 
 		if (this.props.ingredients)
 		{
@@ -103,13 +104,15 @@ class BurgerBuilder extends Component
 const mapStateToProps = state => (
 	{
 		ingredients: state.ingredients,
-		totalPrice: state.totalPrice
+		totalPrice: state.totalPrice,
+		error: state.error
 	});
 
 const mapDispatchToProps = dispatch => (
 	{
 		onIngredientAdded: ingredientName => dispatch(actionCreators.addIngredient(ingredientName)),
-		onIngredientRemoved: ingredientName => dispatch(actionCreators.removeIngredient(ingredientName))
+		onIngredientRemoved: ingredientName => dispatch(actionCreators.removeIngredient(ingredientName)),
+		onInitIngredients: () => dispatch(actionCreators.initIngredients())
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
