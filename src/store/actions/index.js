@@ -7,5 +7,6 @@ export
 
 export
 {
-	purchaseBurger
+	purchaseBurger,
+	purchaseInit
 } from './orderActions';

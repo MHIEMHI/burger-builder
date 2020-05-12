@@ -20,7 +20,7 @@ class Checkout extends Component
 	render()
 	{
 		let summary = <Redirect to="/" />;
-		if (this.props.ingredients)
+		if (this.props.ingredients && !this.props.purchased)
 		{
 			summary = (
 				<div>
@@ -42,7 +42,8 @@ class Checkout extends Component
 
 const mapStateToProps = state => (
 	{
-		ingredients: state.burgerBuilder.ingredients
+		ingredients: state.burgerBuilder.ingredients,
+		purchased: state.order.purchased
 	});
 
 export default connect(mapStateToProps)(Checkout);
