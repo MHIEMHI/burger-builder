@@ -222,4 +222,5 @@ const mapDispatchToProps = dispatch => (
 	{
 		onPurchaseBurgerStart: order => dispatch(actionCreators.purchaseBurger(order))
 	});
+
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
