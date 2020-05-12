@@ -25,6 +25,12 @@ export const orderReducer = (state = initialState, action) =>
 				loading: false
 			};
 
+		case actionTypes.PURCHASE_BURGER_START:
+			return {
+				...state,
+				loading: true
+			};
+
 		default:
 			return state;
 	}

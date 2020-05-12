@@ -12,7 +12,6 @@ import * as actionCreators from '../../../store/actions';
 class ContactData extends Component
 {
 	state = {
-		loading: false,
 		formIsValid: false,
 		orderForm: {
 			name: {
@@ -199,7 +198,7 @@ class ContactData extends Component
 			</form>
 		);
 
-		if (this.state.loading)
+		if (this.props.loading)
 		{
 			form = <Spinner />;
 		}
@@ -215,11 +214,12 @@ class ContactData extends Component
 const mapStateToProps = state => (
 	{
 		ingredients: state.ingredients,
-		totalPrice: state.totalPrice
+		totalPrice: state.totalPrice,
+		loading: state.loading
 	});
 
 const mapDispatchToProps = dispatch => (
 	{
-		onPurchaseBurgerStart: order => dispatch(actionCreators.purchaseBurgerStart(order))
+		onPurchaseBurgerStart: order => dispatch(actionCreators.purchaseBurger(order))
 	});
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
