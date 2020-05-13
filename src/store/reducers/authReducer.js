@@ -19,6 +19,7 @@ const authReducer = (state = initialState, action) =>
 		case actionTypes.AUTH_START: return authStart(state, action);
 		case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
 		case actionTypes.AUTH_FAILED: return authFailed(state, action);
+		case actionTypes.AUTH_LOGOUT: return initialState;
 		default: return state;
 	}
 };
