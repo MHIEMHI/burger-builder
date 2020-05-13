@@ -6,7 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Auth.module.css';
 import * as actionCreators from '../../store/actions';
 
-export class Auth extends Component
+class Auth extends Component
 {
 	state = {
 		controls: {
@@ -103,7 +103,7 @@ export class Auth extends Component
 	submitHandler = (e) =>
 	{
 		e.preventDefault();
-		this.props.onAuth(this.state.controls.email, this.state.controls.password);
+		this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
 	};
 
 	render()
@@ -129,7 +129,7 @@ export class Auth extends Component
 			<div className={classes.Auth}>
 				<form onSubmit={this.submitHandler}>
 					{form}
-					<Button btnType="Success" disabled={!this.state.formIsValid}>SUBMIT</Button>
+					<Button btnType="Success">SUBMIT</Button>
 				</form>
 			</div >
 		);
@@ -140,8 +140,9 @@ const mapStateToProps = state => ({
 
 });
 
-const mapDispatchToProps = dispatch => ({
-	onAuth: (login, password) => dispatch(actionCreators.auth(login, password))
-});
+const mapDispatchToProps = dispatch => (
+	{
+		onAuth: (login, password) => dispatch(actionCreators.auth(login, password))
+	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
