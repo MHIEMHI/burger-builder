@@ -42,7 +42,8 @@ class Auth extends Component
 				touched: false,
 				errorMessage: 'Password is missing'
 			}
-		}
+		},
+		isSignUp: true
 	};
 
 	checkValidity = (value, rules) =>
@@ -103,7 +104,15 @@ class Auth extends Component
 	submitHandler = (e) =>
 	{
 		e.preventDefault();
-		this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+		this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp);
+	};
+
+	switchAuthModeHandler = () =>
+	{
+		this.setState((prevState) =>
+		{
+			return { isSignUp: !prevState.isSignUp };
+		});
 	};
 
 	render()
@@ -131,6 +140,12 @@ class Auth extends Component
 					{form}
 					<Button btnType="Success">SUBMIT</Button>
 				</form>
+				<Button
+					btnType="Danger"
+					clicked={this.switchAuthModeHandler}
+				>
+					SWITCH TO SIGN {this.state.isSignUp ? 'IN' : 'UP'}
+				</Button>
 			</div >
 		);
 	}
@@ -142,7 +157,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => (
 	{
-		onAuth: (login, password) => dispatch(actionCreators.auth(login, password))
+		onAuth: (login, password, isSignUp) => dispatch(actionCreators.auth(login, password, isSignUp))
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
