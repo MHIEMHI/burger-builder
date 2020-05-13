@@ -14,5 +14,6 @@ export
 
 export
 {
-	auth
+	auth,
+	logout
 } from './authActions';
