@@ -122,7 +122,7 @@ class ContactData extends Component
 			price: this.props.totalPrice,
 			orderData: formData
 		};
-		this.props.onPurchaseBurgerStart(order);
+		this.props.onPurchaseBurgerStart(order, this.props.token);
 	};
 
 	checkValidity = (value, rules) =>
@@ -229,12 +229,13 @@ const mapStateToProps = state => (
 	{
 		ingredients: state.burgerBuilder.ingredients,
 		totalPrice: state.burgerBuilder.totalPrice,
-		loading: state.order.loading
+		loading: state.order.loading,
+		token: state.auth.token
 	});
 
 const mapDispatchToProps = dispatch => (
 	{
-		onPurchaseBurgerStart: order => dispatch(actionCreators.purchaseBurger(order))
+		onPurchaseBurgerStart: (order, token) => dispatch(actionCreators.purchaseBurger(order, token))
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
