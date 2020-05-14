@@ -7,6 +7,7 @@ import classes from './Auth.module.css';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { Redirect } from 'react-router';
+import { updateObject } from '../../shared/utility';
 
 class Auth extends Component
 {
@@ -97,16 +98,16 @@ class Auth extends Component
 
 	inputChangedHandler = (e) =>
 	{
-		const updatedControls = {
-			...this.state.controls,
-			[e.target.name]:
+		const updatedControls = updateObject(this.state.controls,
 			{
-				...this.state.controls[e.target.name],
-				value: e.target.value,
-				valid: this.checkValidity(e.target.value, this.state.controls[e.target.name].validation),
-				touched: true
-			}
-		};
+				[e.target.name]:
+					updateObject(this.state.controls[e.target.name],
+						{
+							value: e.target.value,
+							valid: this.checkValidity(e.target.value, this.state.controls[e.target.name].validation),
+							touched: true
+						})
+			});
 
 		this.setState({ controls: updatedControls });
 	};
