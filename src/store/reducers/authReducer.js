@@ -6,7 +6,7 @@ const initialState = {
 	userId: null,
 	error: null,
 	loading: false,
-	authRedirect: ''
+	authRedirect: '/'
 };
 
 const authStart = (state, action) => updateObject(state, { error: null, loading: true });
