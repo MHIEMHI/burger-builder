@@ -8,7 +8,7 @@ const initialeState = {
 };
 const purchaseSuccess = (state, action) =>
 {
-	const newOrder = updateObject(action.orderData, { id: action.orderId });
+	const newOrder = updateObject(action.orderData, { id: action.id });
 	return updateObject(state, {
 		loading: false,
 		orders: state.orders.concat(newOrder),

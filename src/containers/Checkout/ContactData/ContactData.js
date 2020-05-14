@@ -38,7 +38,8 @@ class ContactData extends Component
 				},
 				value: '',
 				validation: {
-					required: true
+					required: true,
+					isEmail: true
 				},
 				valid: false,
 				touched: false,
@@ -70,7 +71,8 @@ class ContactData extends Component
 				validation: {
 					required: true,
 					minLength: 5,
-					maxLength: 5
+					maxLength: 5,
+					isNumeric: true
 				},
 				valid: false,
 				touched: false,
@@ -118,9 +120,10 @@ class ContactData extends Component
 		const order = {
 			ingredients: this.props.ingredients,
 			price: this.props.totalPrice,
-			orderData: formData
+			orderData: formData,
+			userId: this.props.userId
 		};
-		this.props.onPurchaseBurgerStart(order);
+		this.props.onPurchaseBurgerStart(order, this.props.token);
 	};
 
 	checkValidity = (value, rules) =>
@@ -145,6 +148,18 @@ class ContactData extends Component
 		if (rules.maxLength)
 		{
 			isValid = value.length <= rules.maxLength && isValid;
+		}
+
+		if (rules.isEmail)
+		{
+			const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+			isValid = pattern.test(value) && isValid;
+		}
+
+		if (rules.isNumeric)
+		{
+			const pattern = /^\d+$/;
+			isValid = pattern.test(value) && isValid;
 		}
 
 		return isValid;
@@ -215,12 +230,14 @@ const mapStateToProps = state => (
 	{
 		ingredients: state.burgerBuilder.ingredients,
 		totalPrice: state.burgerBuilder.totalPrice,
-		loading: state.order.loading
+		loading: state.order.loading,
+		token: state.auth.token,
+		userId: state.auth.userId
 	});
 
 const mapDispatchToProps = dispatch => (
 	{
-		onPurchaseBurgerStart: order => dispatch(actionCreators.purchaseBurger(order))
+		onPurchaseBurgerStart: (order, token) => dispatch(actionCreators.purchaseBurger(order, token))
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
@@ -8,7 +9,6 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
-import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
 
 class BurgerBuilder extends Component
@@ -36,7 +36,15 @@ class BurgerBuilder extends Component
 
 	purchaseHandler = () =>
 	{
-		this.setState({ purchasing: true });
+		if (this.props.isAuthenticated)
+		{
+			this.setState({ purchasing: true });
+		}
+		else
+		{
+			this.props.onSetAuthRedirectPath("/checkout");
+			this.props.history.push('/auth');
+		}
 	};
 
 	updatePurchaseState = ingredients =>
@@ -86,6 +94,7 @@ class BurgerBuilder extends Component
 						price={this.props.totalPrice}
 						purchasable={this.updatePurchaseState(this.props.ingredients)}
 						ordered={this.purchaseHandler}
+						isAuthenticated={this.props.isAuthenticated}
 					/>
 				</Aux >
 			);
@@ -106,7 +115,8 @@ const mapStateToProps = state => (
 	{
 		ingredients: state.burgerBuilder.ingredients,
 		totalPrice: state.burgerBuilder.totalPrice,
-		error: state.burgerBuilder.error
+		error: state.burgerBuilder.error,
+		isAuthenticated: state.auth.token !== null
 	});
 
 const mapDispatchToProps = dispatch => (
@@ -114,7 +124,8 @@ const mapDispatchToProps = dispatch => (
 		onIngredientAdded: ingredientName => dispatch(actionCreators.addIngredient(ingredientName)),
 		onIngredientRemoved: ingredientName => dispatch(actionCreators.removeIngredient(ingredientName)),
 		onInitIngredients: () => dispatch(actionCreators.initIngredients()),
-		onPurchaseInit: () => dispatch(actionCreators.purchaseInit())
+		onPurchaseInit: () => dispatch(actionCreators.purchaseInit()),
+		onSetAuthRedirectPath: path => dispatch(actionCreators.setAuthRedirectPath(path))
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
