@@ -55,7 +55,7 @@ export const auth = (email, password, isSignUp) =>
 			password,
 			returnSecureToken: true
 		};
-		let url = `https://identitytoolkit.googleapis.com/v1/accounts:${isSignUp ? 'signUp' : 'signInWithPassword'}?key=AIzaSyCqi1LeTPnbuG7oixmtUud4SVa1g4FUCxg`;
+		let url = `https://identitytoolkit.googleapis.com/v1/accounts:${isSignUp ? 'signUp' : 'signInWithPassword'}?key=${process.env.REACT_APP_API_KEY}`;
 		axios.post(url, authData)
 			.then(response =>
 			{
