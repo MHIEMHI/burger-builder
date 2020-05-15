@@ -12,7 +12,7 @@ describe('<NavigationItems />', () =>
 				userId: null,
 				error: null,
 				loading: false,
-				authRedirect: ''
+				authRedirect: '/'
 			});
 	});
 
