@@ -1,0 +1,23 @@
+{
+  "name": "burger-builder",
+  "version": "1.0.0",
+  "description": "React - The Complete Guide (incl Hooks, React Router, Redux)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MHIEMHI/burger-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MHIEMHI/burger-builder/issues"
+  },
+  "homepage": "https://github.com/MHIEMHI/burger-builder#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
