@@ -1,4 +1,6 @@
 {
+  "name": "burger-builder",
+  "version": "1.0.0",
   "description": "React - The Complete Guide (incl Hooks, React Router, Redux)",
   "main": "index.js",
   "scripts": {
