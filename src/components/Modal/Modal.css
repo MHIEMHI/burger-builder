@@ -26,7 +26,7 @@
 
 .fade-slide-enter
 {
-	opacity: 1;
+	opacity: 0;
 }
 
 .fade-slide-enter-active
@@ -36,7 +36,7 @@
 
 .fade-slide-exit
 {
-	opacity: 0;
+	opacity: 1;
 }
 
 .fade-slide-exit-active
