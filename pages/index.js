@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 
-const IndexPage = () =>
+class IndexPage extends Component
 {
-	return (
-		<div>
-			<h1>The Main page</h1>
-			<p>Go to : <Link href='/auth'><a>Auth</a></Link></p>
-			<button onClick={() => Router.push('/auth')}>Go to Auth</button>
-		</div>
-	);
+	static async getInitialProps(context)
+	{
+		const promise = new Promise((resolve, reject) =>
+		{
+			setTimeout(() =>
+			{
+				resolve({ appName: 'Next js App' });
+			}, 1000);
+		});
+		return promise;
+	}
+
+	render()
+	{
+		return (
+			<div>
+				<h1>The Main page {this.props.appName}</h1>
+				<p>Go to : <Link href='/auth'><a>Auth</a></Link></p>
+				<button onClick={() => Router.push('/auth')}>Go to Auth</button>
+			</div>
+		);
+	}
 };
 
 export default IndexPage;
