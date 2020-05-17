@@ -1,4 +1,5 @@
 import { put, delay } from 'redux-saga/effects';
+import Axios from 'axios';
 
 import * as actionCreators from '../actions';
 
@@ -14,4 +15,30 @@ export function* checkAuthTimeoutSaga(action)
 {
 	yield delay(action.expirationTime * 1000);
 	yield put(actionCreators.logout());
+}
+
+export function* authUserSaga(action)
+{
+	yield put(actionCreators.authStart());
+	const authData = {
+		email: action.email,
+		password: action.password,
+		returnSecureToken: true
+	};
+	let url = `https://identitytoolkit.googleapis.com/v1/accounts:${action.isSignUp ? 'signUp' : 'signInWithPassword'}?key=${process.env.REACT_APP_API_KEY}`;
+	try
+	{
+		const response = yield Axios.post(url, authData);
+
+		const expirationDate = yield new Date(new Date().getTime() + response.data.expiresIn * 1000);
+		yield localStorage.setItem('token', response.data.idToken);
+		yield localStorage.setItem('userId', response.data.localId);
+		yield localStorage.setItem('expirationDate', expirationDate);
+		yield put(actionCreators.authSuccess(response.data.idToken, response.data.localId));
+		yield put(actionCreators.checkAuthTimeout(response.data.expiresIn));
+	}
+	catch (error)
+	{
+		yield put(actionCreators.authFail(error.response.data.error));
+	}
 }
