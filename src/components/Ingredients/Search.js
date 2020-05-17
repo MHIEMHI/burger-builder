@@ -16,7 +16,7 @@ const Search = React.memo(props =>
 			if (filter === filterRef.current.value)
 			{
 				const query = filter ? `?orderBy="title"&equalTo="${filter}"` : '';
-				fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json' + query)
+				fetch(`${process.env.REACT_APP_BASE_URL}/ingredients.json${query}`)
 					.then(response => response.json())
 					.then(responseData =>
 					{

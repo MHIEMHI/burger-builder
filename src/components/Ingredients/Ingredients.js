@@ -15,7 +15,7 @@ function Ingredients()
 
 	const addIngredientHandler = ingredient =>
 	{
-		fetch(process.env.REACT_APP_BASE_URL + '/ingredients.json', {
+		fetch(`${process.env.REACT_APP_BASE_URL}/ingredients.json`, {
 			method: 'POST',
 			body: JSON.stringify(ingredient),
 			headers: { 'Content-Type': 'application/json' }
@@ -29,9 +29,15 @@ function Ingredients()
 
 	const removeIngredientHandler = id =>
 	{
-		setIngredients(prevState => prevState.filter(ing => ing.id !== id));
-
+		fetch(`${process.env.REACT_APP_BASE_URL}/ingredients/${id}.json`, {
+			method: 'DELETE',
+		}).then(response => response.json())
+			.then(responseData =>
+			{
+				setIngredients(prevState => prevState.filter(ing => ing.id !== id));
+			});
 	};
+
 	return (
 		<div className="App">
 			<IngredientForm addIngredient={addIngredientHandler} />
