@@ -28,7 +28,14 @@ export const authFail = error =>
 export const logout = () =>
 {
 	return {
-		type: actionTypes.AUTH_LOGOUT
+		type: actionTypes.AUTH_LOGOUT_START
+	};
+};
+
+export const logoutSuccess = () =>
+{
+	return {
+		type: actionTypes.AUTH_LOGOUT_SUCCESS
 	};
 };
 
