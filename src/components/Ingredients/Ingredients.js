@@ -10,18 +10,17 @@ function Ingredients()
 
 	useEffect(() =>
 	{
-		!ingredients.length && fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json').then(response =>
-		{
-			return response.json();
-		}).then(responseData =>
-		{
-			const loadedIngredients = [];
-			for (const key in responseData)
+		!ingredients.length && fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json')
+			.then(response => response.json())
+			.then(responseData =>
 			{
-				loadedIngredients.push({ id: key, ...responseData[key] });
-			}
-			setIngredients(loadedIngredients);
-		});
+				const loadedIngredients = [];
+				for (const key in responseData)
+				{
+					loadedIngredients.push({ id: key, ...responseData[key] });
+				}
+				setIngredients(loadedIngredients);
+			});
 	}, [ingredients, setIngredients]);
 
 	const addIngredientHandler = ingredient =>
@@ -30,14 +29,12 @@ function Ingredients()
 			method: 'POST',
 			body: JSON.stringify(ingredient),
 			headers: { 'Content-Type': 'application/json' }
-		}).then(response =>
-		{
-			return response.json();
-		}).then(responseData =>
-		{
-			setIngredients(prevState => [...prevState, { id: responseData.name, ...ingredient }]);
+		}).then(response => response.json())
+			.then(responseData =>
+			{
+				setIngredients(prevState => [...prevState, { id: responseData.name, ...ingredient }]);
 
-		});
+			});
 	};
 
 	const removeIngredientHandler = id =>
@@ -50,7 +47,7 @@ function Ingredients()
 			<IngredientForm addIngredient={addIngredientHandler} />
 
 			<section>
-				<Search />
+				<Search setIngredients={setIngredients} />
 				<IngredientList onRemoveItem={removeIngredientHandler} ingredients={ingredients} />
 			</section>
 		</div>
