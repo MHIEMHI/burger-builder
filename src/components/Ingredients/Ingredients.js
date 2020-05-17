@@ -10,7 +10,18 @@ function Ingredients()
 
 	const addIngredientHandler = ingredient =>
 	{
-		setIngredients(prevState => [...prevState, { id: Math.random().toString(), ...ingredient }]);
+		fetch(process.env.REACT_APP_BASE_URL + '/ingredients.json', {
+			method: 'POST',
+			body: JSON.stringify(ingredient),
+			headers: { 'Content-Type': 'application/json' }
+		}).then(response =>
+		{
+			return response.json();
+		}).then(responseData =>
+		{
+			setIngredients(prevState => [...prevState, { id: responseData.name, ...ingredient }]);
+
+		});
 	};
 
 	const removeIngredientHandler = id =>
