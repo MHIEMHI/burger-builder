@@ -17,5 +17,6 @@ export
 	auth,
 	logout,
 	setAuthRedirectPath,
-	authCheckState
+	authCheckState,
+	logoutSuccess
 } from './authActions';
