@@ -10,7 +10,7 @@ function Ingredients()
 
 	useEffect(() =>
 	{
-		fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json').then(response =>
+		!ingredients.length && fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json').then(response =>
 		{
 			return response.json();
 		}).then(responseData =>
@@ -22,7 +22,7 @@ function Ingredients()
 			}
 			setIngredients(loadedIngredients);
 		});
-	}, []);
+	}, [ingredients, setIngredients]);
 
 	const addIngredientHandler = ingredient =>
 	{
