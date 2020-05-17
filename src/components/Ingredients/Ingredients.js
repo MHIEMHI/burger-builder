@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -8,20 +8,10 @@ function Ingredients()
 {
 	const [ingredients, setIngredients] = useState([]);
 
-	useEffect(() =>
+	const filteredIngredientsHandler = useCallback(filteredIngredients =>
 	{
-		!ingredients.length && fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json')
-			.then(response => response.json())
-			.then(responseData =>
-			{
-				const loadedIngredients = [];
-				for (const key in responseData)
-				{
-					loadedIngredients.push({ id: key, ...responseData[key] });
-				}
-				setIngredients(loadedIngredients);
-			});
-	}, [ingredients, setIngredients]);
+		setIngredients(filteredIngredients);
+	}, []);
 
 	const addIngredientHandler = ingredient =>
 	{
@@ -47,7 +37,7 @@ function Ingredients()
 			<IngredientForm addIngredient={addIngredientHandler} />
 
 			<section>
-				<Search setIngredients={setIngredients} />
+				<Search setIngredients={filteredIngredientsHandler} />
 				<IngredientList onRemoveItem={removeIngredientHandler} ingredients={ingredients} />
 			</section>
 		</div>

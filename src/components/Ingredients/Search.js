@@ -8,6 +8,7 @@ const Search = React.memo(props =>
 	const [filter, setFilter] = useState('');
 
 	const { setIngredients } = props;
+
 	useEffect(() =>
 	{
 		const query = filter ? `?orderBy="title"&equalTo="${filter}"` : '';
