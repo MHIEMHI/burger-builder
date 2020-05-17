@@ -19,10 +19,12 @@ const IngredientForm = React.memo(props =>
 
 	const handleChange = e =>
 	{
-		setInputState({
-			...inputState,
-			[e.target.name]: e.target.value
-		});
+		const value = e.target.value;
+		const key = e.target.name;
+		setInputState(prevState => ({
+			...prevState,
+			[key]: value
+		}));
 	};
 
 	return (
