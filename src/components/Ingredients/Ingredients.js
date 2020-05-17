@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -7,6 +7,22 @@ import IngredientList from './IngredientList';
 function Ingredients()
 {
 	const [ingredients, setIngredients] = useState([]);
+
+	useEffect(() =>
+	{
+		fetch(process.env.REACT_APP_BASE_URL + 'ingredients.json').then(response =>
+		{
+			return response.json();
+		}).then(responseData =>
+		{
+			const loadedIngredients = [];
+			for (const key in responseData)
+			{
+				loadedIngredients.push({ id: key, ...responseData[key] });
+			}
+			setIngredients(loadedIngredients);
+		});
+	}, []);
 
 	const addIngredientHandler = ingredient =>
 	{
